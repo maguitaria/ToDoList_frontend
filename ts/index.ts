@@ -1,7 +1,7 @@
 /**
  * @fileoverview This file is rendering the TodoList on the page (appending and fetching URL)
  */
-const BACKEND_ROOT_URL = 'http://localhost:4000'
+const BACKEND_ROOT_URL = 'https://todo-backend-4kqy.onrender.com'
 
 import { Task } from "./class/Task"
 import { Todo } from "./class/Todo"
