@@ -16,10 +16,33 @@
 
 <body>
     <div class="container-fluid">
-        <h3> My Todos</h3>
-        <form>
-            <input id="newtodo" class="form-control" placeholder="Enter new task.." />
-        </form>
+        <div class="row m-1 p-4">
+            <h3 class='p-1   text-center mx-auto display-inline-block'> My Todos</h3>
+        </div>
+
+        <div class="row m-1 p-3">
+            <div class="col col-11 mx-auto">
+                <div
+                    class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
+                    <div class="col">
+                        <input id="newtodo"
+                            class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded"
+                            type="text" placeholder="Add new task">
+                    </div>
+
+                    <div class="col-auto m-0 px-2 d-flex align-items-center">
+                        <i class="fa fa-calendar my-2 px-1 text-primary btn due-date-button"></i>
+                        <i class="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none">
+                        </i>
+                    </div>
+                    <div class="col-auto px-0 mx-0 mr-2">
+                        <button type="button" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-2 mx-4 border-black-25 border-bottom"></div>
         <ul id="todolist" class="list-group"></ul>
     </div>
 </body>

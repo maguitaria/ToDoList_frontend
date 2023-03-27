@@ -1,6 +1,13 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.6;
+    background-color: #a2a8d3;
+}
+
 h3 {
     margin-top: 20px;
     margin-bottom: 20px;
+    color: aliceblue;
 }
 
 form {

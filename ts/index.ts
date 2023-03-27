@@ -44,9 +44,10 @@ input.addEventListener('keypress', event => {
 // render of task 
 const renderTask = (task: Task) => {
     const list_item: HTMLLIElement = document.createElement('li')
-    list_item.setAttribute('class', 'list-group-item')
+    list_item.setAttribute('class', 'list-group-item col mx-auto')
     renderSpan(list_item, task.text)
     renderLink(list_item, task.id)
+    
     list.append(list_item)
 }
 // render a span for task text
