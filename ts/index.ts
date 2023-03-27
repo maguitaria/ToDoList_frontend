@@ -3,8 +3,8 @@
  */
 const BACKEND_ROOT_URL = 'https://todo-backend-4kqy.onrender.com'
 
-import { Task } from "./class/Task"
-import { Todo } from "./class/Todo"
+import { Task } from "./class/Task.js"
+import { Todo } from "./class/Todo.js"
 const todos = new Todo(BACKEND_ROOT_URL)
 
 const list = <HTMLUListElement>document.querySelector('#todolist')
@@ -16,6 +16,7 @@ input.disabled = true
 todos.getTasks().then((tasks: Array<Task>) => {
     tasks.forEach(task => {
         renderTask(task)
+      
     })
     input.disabled = false
 }).catch(error => {
@@ -46,6 +47,7 @@ const renderTask = (task: Task) => {
     list_item.setAttribute('class', 'list-group-item')
     renderSpan(list_item, task.text)
     renderLink(list_item, task.id)
+    list.append(list_item)
 }
 // render a span for task text
 const renderSpan = (list_item: HTMLLIElement, text: string) => {
