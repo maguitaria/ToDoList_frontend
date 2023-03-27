@@ -8,15 +8,15 @@ import { Todo } from "./class/Todo.js"
 const todos = new Todo(BACKEND_ROOT_URL)
 
 const list = <HTMLUListElement>document.querySelector('#todolist')
-
 const input = <HTMLInputElement>document.querySelector('#newtodo')
+const input_button = <HTMLButtonElement>document.getElementById('input-btn')
 
 input.disabled = true
 
 todos.getTasks().then((tasks: Array<Task>) => {
     tasks.forEach(task => {
         renderTask(task)
-      
+
     })
     input.disabled = false
 }).catch(error => {
@@ -38,6 +38,19 @@ input.addEventListener('keypress', event => {
         event.preventDefault()
     }
 })
+input_button.addEventListener('click', event => {
+    const text = input.value.trim()
+    if (text !== '') {
+        todos.addTask(text)
+            .then((task: any) => {
+                input.value = ''
+                input.focus()
+                renderTask(<Task>task)
+            })
+    }
+    event.preventDefault()
+}
+)
 
 
 
@@ -47,7 +60,7 @@ const renderTask = (task: Task) => {
     list_item.setAttribute('class', 'list-group-item col mx-auto')
     renderSpan(list_item, task.text)
     renderLink(list_item, task.id)
-    
+
     list.append(list_item)
 }
 // render a span for task text
