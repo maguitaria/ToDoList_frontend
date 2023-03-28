@@ -26,6 +26,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _Todo_instances, _Todo_backend_url, _Todo_readJson, _Todo_addToArray, _Todo_removeFromArray;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Todo = void 0;
+const express_1 = require("express");
 const Task_1 = require("./Task");
 class Todo {
     constructor(url) {
@@ -65,7 +66,7 @@ class Todo {
         });
         this.removeTask = (id) => __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-                const json = JSON.stringify({ description: text });
+                const json = JSON.stringify({ description: express_1.text });
                 fetch(__classPrivateFieldGet(this, _Todo_backend_url, "f") + '/delete/' + id, {
                     method: 'delete',
                 })

@@ -22,8 +22,9 @@ savedTheme === null ?
     changeTheme('standard')
     : changeTheme(localStorage.getItem('savedTheme'));
 input.disabled = true;
-todos.getTasks().then((tasks) => {
-    tasks.forEach(task => {
+todos.getTasks()
+    .then((tasks) => {
+    tasks.forEach((task) => {
         renderTask(task);
     });
     input.disabled = false;

@@ -30,9 +30,11 @@ savedTheme === null ?
 
 input.disabled = true
 
-todos.getTasks().then((tasks: Array<Task>) => {
-    tasks.forEach(task => {
+todos.getTasks()
+.then( (tasks : Array<Task> | any )   => {
+    tasks.forEach((task: Task) => {
         renderTask(task)
+        
 
     })
     input.disabled = false
