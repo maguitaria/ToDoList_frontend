@@ -26,9 +26,7 @@ savedTheme === null ?
     changeTheme('standard')
     : changeTheme(localStorage.getItem('savedTheme'));
 
-const standardTheme = document.querySelector('.standart-theme')
-const lightTheme = document.querySelector('.light-theme')
-const darkTheme = document.querySelector('.dark-theme')
+
 
 input.disabled = true
 
