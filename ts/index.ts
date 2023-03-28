@@ -9,7 +9,6 @@ import { Todo } from "./class/Todo.js"
 const todos = new Todo(BACKEND_ROOT_URL)
 
 const list = <HTMLUListElement>document.getElementById('todolist')
-<<<<<<< HEAD
 const input = <HTMLInputElement>document.getElementById('todo-input')
 const input_button = <HTMLButtonElement>document.getElementById('todo-btn')
 
@@ -26,10 +25,6 @@ let savedTheme = localStorage.getItem('savedTheme');
 savedTheme === null ?
     changeTheme('standard')
     : changeTheme(localStorage.getItem('savedTheme'));
-=======
-const input = <HTMLInputElement>document.getElementById('newtodo')
-const input_button = <HTMLButtonElement>document.getElementById('input-btn')
->>>>>>> c581e27793b968e6b0a5596354b52250f8986507
 
 const standardTheme = document.querySelector('.standart-theme')
 const lightTheme = document.querySelector('.light-theme')
