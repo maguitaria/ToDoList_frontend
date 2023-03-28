@@ -3,8 +3,8 @@
  * 
  */
 
-import { text } from "express"
-import { Task } from "./Task"
+
+import { Task } from "./Task.js"
 class Todo {
     tasks: Array<Task> = []
     #backend_url = ''
@@ -45,7 +45,6 @@ class Todo {
 
     removeTask = async (id: number) => {
         return new Promise(async (resolve, reject) => {
-            const json = JSON.stringify({ description: text })
             fetch(this.#backend_url + '/delete/' + id, {
                 method: 'delete',
             })

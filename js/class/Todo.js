@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @fileoverview This file includes the functionality for adding tasks on the frontend side.
  *
@@ -24,10 +23,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Todo_instances, _Todo_backend_url, _Todo_readJson, _Todo_addToArray, _Todo_removeFromArray;
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Todo = void 0;
-const express_1 = require("express");
-const Task_1 = require("./Task");
+import { Task } from "./Task.js";
 class Todo {
     constructor(url) {
         _Todo_instances.add(this);
@@ -66,7 +62,6 @@ class Todo {
         });
         this.removeTask = (id) => __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-                const json = JSON.stringify({ description: express_1.text });
                 fetch(__classPrivateFieldGet(this, _Todo_backend_url, "f") + '/delete/' + id, {
                     method: 'delete',
                 })
@@ -83,17 +78,17 @@ class Todo {
         __classPrivateFieldSet(this, _Todo_backend_url, url, "f");
     }
 }
-exports.Todo = Todo;
 _Todo_backend_url = new WeakMap(), _Todo_instances = new WeakSet(), _Todo_readJson = function _Todo_readJson(taskAsJson) {
     taskAsJson.forEach((node) => {
-        const task = new Task_1.Task(node.id, node.description);
+        const task = new Task(node.id, node.description);
         this.tasks.push(task);
     });
 }, _Todo_addToArray = function _Todo_addToArray(id, text) {
-    const task = new Task_1.Task(id, text);
+    const task = new Task(id, text);
     this.tasks.push(task);
     return task;
 }, _Todo_removeFromArray = function _Todo_removeFromArray(id) {
     const arrayWithoutRemoved = this.tasks.filter(task => task.id !== id);
     this.tasks = arrayWithoutRemoved;
 };
+export { Todo };

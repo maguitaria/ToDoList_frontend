@@ -1,14 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @fileoverview This file is rendering the TodoList on the page (appending and fetching URL)
  */
 const BACKEND_ROOT_URL = 'https://todo-backend-4kqy.onrender.com';
-const Todo_js_1 = require("./class/Todo.js");
-const todos = new Todo_js_1.Todo(BACKEND_ROOT_URL);
-const list = document.getElementById('todolist');
-const input = document.getElementById('todo-input');
-const input_button = document.getElementById('todo-btn');
+import { Todo } from "./class/Todo.js";
+const todos = new Todo(BACKEND_ROOT_URL);
+const list = document.querySelector('#todolist');
+const input = document.querySelector('#todo-input');
+const input_button = document.querySelector('#todo-btn');
 const standardTheme = document.querySelector('.standard-theme');
 const lightTheme = document.querySelector('.light-theme');
 const darkerTheme = document.querySelector('.darker-theme');
@@ -101,7 +99,7 @@ function changeTheme(color) {
     color === 'dark' ?
         document.getElementById('title').classList.add('darker-title')
         : document.getElementById('title').classList.remove('darker-title');
-    document.querySelector('todo-input').className = `${color}-input`;
+    document.getElementById('todo-input').className = `${color}-input`;
     // Change todo color without changing their status (completed or not):
     document.querySelectorAll('.todo').forEach(todo => {
         Array.from(todo.classList).some(item => item === 'completed') ?

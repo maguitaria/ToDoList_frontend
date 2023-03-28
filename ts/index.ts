@@ -3,14 +3,14 @@
  */
 const BACKEND_ROOT_URL = 'https://todo-backend-4kqy.onrender.com'
 
-import { InterfaceTypeWithDeclaredMembers } from "typescript"
+//import { InterfaceTypeWithDeclaredMembers } from "typescript"
 import { Task } from "./class/Task.js"
 import { Todo } from "./class/Todo.js"
 const todos = new Todo(BACKEND_ROOT_URL)
 
-const list = <HTMLUListElement>document.getElementById('todolist')
-const input = <HTMLInputElement>document.getElementById('todo-input')
-const input_button = <HTMLButtonElement>document.getElementById('todo-btn')
+const list = <HTMLUListElement>document.querySelector('#todolist')
+const input = <HTMLInputElement>document.querySelector('#todo-input')
+const input_button = <HTMLButtonElement>document.querySelector('#todo-btn')
 
 const standardTheme = <HTMLElement>document.querySelector('.standard-theme')
 const lightTheme = <HTMLElement>document.querySelector('.light-theme')
@@ -31,16 +31,16 @@ savedTheme === null ?
 input.disabled = true
 
 todos.getTasks()
-.then( (tasks : Array<Task> | any )   => {
-    tasks.forEach((task: Task) => {
-        renderTask(task)
-        
+    .then((tasks: Array<Task> | any) => {
+        tasks.forEach((task: Task) => {
+            renderTask(task)
 
+
+        })
+        input.disabled = false
+    }).catch(error => {
+        alert(error)
     })
-    input.disabled = false
-}).catch(error => {
-    alert(error)
-})
 
 
 input.addEventListener('keypress', event => {
@@ -121,7 +121,7 @@ function changeTheme(color: any) {
         document.getElementById('title')!.classList.add('darker-title')
         : document.getElementById('title')!.classList.remove('darker-title');
 
-    document.querySelector('todo-input')!.className = `${color}-input`;
+    document.getElementById('todo-input')!.className = `${color}-input`;
     // Change todo color without changing their status (completed or not):
     document.querySelectorAll('.todo').forEach(todo => {
         Array.from(todo.classList).some(item => item === 'completed') ?
