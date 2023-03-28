@@ -7,9 +7,13 @@ import { Task } from "./class/Task.js"
 import { Todo } from "./class/Todo.js"
 const todos = new Todo(BACKEND_ROOT_URL)
 
-const list = <HTMLUListElement>document.querySelector('#todolist')
-const input = <HTMLInputElement>document.querySelector('#newtodo')
+const list = <HTMLUListElement>document.getElementById('todolist')
+const input = <HTMLInputElement>document.getElementById('newtodo')
 const input_button = <HTMLButtonElement>document.getElementById('input-btn')
+
+const standardTheme = document.querySelector('.standart-theme')
+const lightTheme = document.querySelector('.light-theme')
+const darkTheme = document.querySelector('.dark-theme')
 
 input.disabled = true
 
@@ -34,6 +38,8 @@ input.addEventListener('keypress', event => {
                     input.focus()
                     renderTask(<Task>task)
                 })
+        } else {
+            alert("You must write something!")
         }
         event.preventDefault()
     }
@@ -47,6 +53,8 @@ input_button.addEventListener('click', event => {
                 input.focus()
                 renderTask(<Task>task)
             })
+    } else {
+        alert("You must write something!")
     }
     event.preventDefault()
 }
