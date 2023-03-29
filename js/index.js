@@ -4,9 +4,9 @@
 const BACKEND_ROOT_URL = 'https://todo-backend-4kqy.onrender.com';
 import { Todo } from "./class/Todo.js";
 const todos = new Todo(BACKEND_ROOT_URL);
-const list = document.querySelector('#todolist');
-const input = document.querySelector('#todo-input');
-const input_button = document.querySelector('#todo-btn');
+const list = document.querySelector('.todo-list');
+const input = document.getElementById('todo-input');
+const input_button = document.querySelector('.todo-btn');
 const standardTheme = document.querySelector('.standard-theme');
 const lightTheme = document.querySelector('.light-theme');
 const darkerTheme = document.querySelector('.darker-theme');
@@ -18,7 +18,7 @@ darkerTheme.addEventListener('click', () => changeTheme('darker'));
 let savedTheme = localStorage.getItem('savedTheme');
 savedTheme === null ?
     changeTheme('standard')
-    : changeTheme(localStorage.getItem('savedTheme'));
+    : savedTheme;
 input.disabled = true;
 todos.getTasks()
     .then((tasks) => {
@@ -64,27 +64,43 @@ input_button.addEventListener('click', event => {
 // render of task 
 const renderTask = (task) => {
     const list_item = document.createElement('li');
-    list_item.setAttribute('class', 'list-group-item col mx-auto');
-    renderSpan(list_item, task.text);
-    renderLink(list_item, task.id);
+    list_item.setAttribute('class', 'todo-item');
+    renderDiv(list_item, task.text);
+    // renderLink(list_item, task.id)
+    renderButton(list_item, task.id);
     list.append(list_item);
 };
-// render a span for task text
-const renderSpan = (list_item, text) => {
-    const span = list_item.appendChild(document.createElement('span'));
-    span.innerHTML = text;
+// render a div for task text
+const renderDiv = (list_item, text) => {
+    const div = list_item.appendChild(document.createElement('div'));
+    div.setAttribute('class', 'todo');
+    div.innerHTML = text;
+    div.classList.add('todo', `${savedTheme}-todo`);
 };
 // render a link for deleting tasks
 const renderLink = (list_item, id) => {
     const link = list_item.appendChild(document.createElement('a'));
-    link.innerHTML = '<i class ="bi bi-trash></i>';
-    link.setAttribute('style', 'float: right');
+    link.innerHTML = '<i class ="bi bi-trash>Delete</i>';
+    // link.setAttribute('style', 'float: centre')
     link.addEventListener('click', event => {
         todos.removeTask(id).then((id) => {
             const removeElement = document.querySelector(`[data-key=${id}]`);
             if (removeElement) {
                 list.removeChild(removeElement);
             }
+        }).catch(error => {
+            alert(error);
+        });
+    });
+};
+const renderButton = (list_item, id) => {
+    const deleted = list_item.appendChild(document.createElement('button'));
+    deleted.classList.add('delete-btn', `${savedTheme}-button`);
+    deleted.addEventListener('click', event => {
+        todos.removeTask(id)
+            .then((id) => {
+            // const removeElement = document.querySelector(`[data-key=${id}]`)
+            list.removeChild(list_item);
         }).catch(error => {
             alert(error);
         });
@@ -101,7 +117,7 @@ function changeTheme(color) {
         : document.getElementById('title').classList.remove('darker-title');
     document.getElementById('todo-input').className = `${color}-input`;
     // Change todo color without changing their status (completed or not):
-    document.querySelectorAll('.todo').forEach(todo => {
+    document.querySelectorAll('#todo').forEach(todo => {
         Array.from(todo.classList).some(item => item === 'completed') ?
             todo.className = `todo ${color}-todo completed`
             : todo.className = `todo ${color}-todo`;

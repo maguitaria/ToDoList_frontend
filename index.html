@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link href="./css/style.css" rel="stylesheet">
 
     <title>To-do</title>
 </head>
@@ -17,10 +17,11 @@
 <body>
     <div class="container-fluid">
         <!-- themes -->
-        <div class="standard-theme theme-selector"></div>
-        <div class="light-theme theme-selector"></div>
-        <div class="darker-theme theme-selector"></div>
-
+        <div class="flexrow-container">
+            <div class="standard-theme theme-selector"></div>
+            <div class="light-theme theme-selector"></div>
+            <div class="darker-theme theme-selector"></div>
+        </div>
         <div class="row m-1 p-4">
             <h3 class='p-1  text-center mx-auto display-inline-block' id="title"> My Todos</h3>
         </div>
@@ -33,8 +34,7 @@
                             <input id="todo-input" class="form-control" type="text" placeholder="Add new task">
                         </div>
                         <div class="col-auto px-0 mx-0 mr-2">
-                            <button type="button" class=" todo-btn btn btn-primary my-2 my-sm-0"
-                                id="todo-btn">Add</button>
+                            <button type="button" class=" todo-btn btn  btn-primary" id="todo-btn">Add</button>
                         </div>
                     </form>
                 </div>
@@ -43,11 +43,16 @@
         </div>
 
         <div class="p-2 mx-4 border-black-25 border-bottom"></div>
-
-        <ul id="todolist" class="list-unstyled">
-
-        </ul>
-
+        <div id="myUnOrdList">
+            <ul id="todolist" class="list-unstyled todo-list">
+                <div class="todo">
+                    items added to this list:
+                    <li></li>
+                    <button>delete</button>
+                    <button>check</button>
+                </div> -->
+            </ul>
+        </div>
     </div>
 </body>
 
