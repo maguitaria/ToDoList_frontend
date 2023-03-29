@@ -65,18 +65,28 @@ input_button.addEventListener('click', event => {
 const renderTask = (task) => {
     const list_item = document.createElement('li');
     list_item.setAttribute('class', 'todo-item');
-    renderDiv(list_item, task.text);
-    // renderLink(list_item, task.id)
-    renderButton(list_item, task.id);
+    renderDiv(list_item, task.text, task.id);
     list.append(list_item);
 };
-// render a div for task text
-const renderDiv = (list_item, text) => {
+// render a div for task text ( delete button for deleting div inside)
+function renderDiv(list_item, text, id) {
     const div = list_item.appendChild(document.createElement('div'));
     div.setAttribute('class', 'todo');
     div.innerHTML = text;
     div.classList.add('todo', `${savedTheme}-todo`);
-};
+    const deleted = div.appendChild(document.createElement('button'));
+    // deleted.classList.add('delete-btn', `${savedTheme}-button`);
+    deleted.setAttribute('class', 'bi bi-trash');
+    // deleted.innerHTML = '<span class="bi bi-trash fa-sm" style="font-size:1rem; text-align:center"></span>'
+    deleted.addEventListener('click', event => {
+        todos.removeTask(id)
+            .then((id) => {
+            list_item.removeChild(div);
+        }).catch(error => {
+            alert(error);
+        });
+    });
+}
 // render a link for deleting tasks
 const renderLink = (list_item, id) => {
     const link = list_item.appendChild(document.createElement('a'));
@@ -88,19 +98,6 @@ const renderLink = (list_item, id) => {
             if (removeElement) {
                 list.removeChild(removeElement);
             }
-        }).catch(error => {
-            alert(error);
-        });
-    });
-};
-const renderButton = (list_item, id) => {
-    const deleted = list_item.appendChild(document.createElement('button'));
-    deleted.classList.add('delete-btn', `${savedTheme}-button`);
-    deleted.addEventListener('click', event => {
-        todos.removeTask(id)
-            .then((id) => {
-            // const removeElement = document.querySelector(`[data-key=${id}]`)
-            list.removeChild(list_item);
         }).catch(error => {
             alert(error);
         });

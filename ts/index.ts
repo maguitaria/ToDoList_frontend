@@ -81,19 +81,31 @@ input_button.addEventListener('click', event => {
 const renderTask = (task: Task) => {
     const list_item: HTMLLIElement = document.createElement('li')
     list_item.setAttribute('class', 'todo-item')
-    renderDiv(list_item, task.text)
-    // renderLink(list_item, task.id)
-    renderButton(list_item, task.id)
+    renderDiv(list_item, task.text, task.id)
 
     list.append(list_item)
 }
-// render a div for task text
-const renderDiv = (list_item: HTMLLIElement, text: string) => {
+
+
+// render a div for task text ( delete button for deleting div inside)
+function renderDiv(list_item: HTMLLIElement, text: string, id: number) {
     const div = list_item.appendChild(document.createElement('div'))
     div.setAttribute('class', 'todo')
     div.innerHTML = text
     div.classList.add('todo', `${savedTheme}-todo`);
+    const deleted = div.appendChild(document.createElement('button'))
+    deleted.setAttribute('class', 'bi bi-trash')
+    deleted.addEventListener('click', event => {
+        todos.removeTask(id)
+            .then((id): void => {
+                list_item.removeChild(div)
+            }).catch(error => {
+                alert(error)
+            })
+
+    })
 }
+
 // render a link for deleting tasks
 const renderLink = (list_item: HTMLLIElement, id: number) => {
     const link = list_item.appendChild(document.createElement('a'))
@@ -113,21 +125,8 @@ const renderLink = (list_item: HTMLLIElement, id: number) => {
     })
 
 }
-const renderButton = (list_item: HTMLLIElement, id: number) => {
-    const deleted = list_item.appendChild(document.createElement('button'))
-    deleted.classList.add('delete-btn', `${savedTheme}-button`);
 
-    deleted.addEventListener('click', event => {
-        todos.removeTask(id)
-            .then((id): void => {
-                // const removeElement = document.querySelector(`[data-key=${id}]`)
-                list.removeChild(list_item)
-            }).catch(error => {
-                alert(error)
-            })
-    })
 
-}
 
 // Change theme function:
 function changeTheme(color: any) {
