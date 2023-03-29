@@ -24,7 +24,7 @@ darkerTheme.addEventListener('click', () => changeTheme('darker'))
 let savedTheme = localStorage.getItem('savedTheme');
 savedTheme === null ?
     changeTheme('standard')
-    : changeTheme(localStorage.getItem('savedTheme'));
+    : savedTheme
 
 
 
@@ -80,7 +80,7 @@ input_button.addEventListener('click', event => {
 // render of task 
 const renderTask = (task: Task) => {
     const list_item: HTMLLIElement = document.createElement('li')
-    list_item.setAttribute('class', 'list-group-item col mx-auto')
+    list_item.setAttribute('class', 'list-group-item-action active')
     renderSpan(list_item, task.text)
     renderLink(list_item, task.id)
 
@@ -95,7 +95,7 @@ const renderSpan = (list_item: HTMLLIElement, text: string) => {
 const renderLink = (list_item: HTMLLIElement, id: number) => {
     const link = list_item.appendChild(document.createElement('a'))
     link.innerHTML = '<i class ="bi bi-trash></i>'
-    link.setAttribute('style', 'float: right')
+    link.setAttribute('style', 'float: centre')
 
     link.addEventListener('click', event => {
         todos.removeTask(id).then((id) => {
@@ -123,7 +123,7 @@ function changeTheme(color: any) {
 
     document.getElementById('todo-input')!.className = `${color}-input`;
     // Change todo color without changing their status (completed or not):
-    document.querySelectorAll('.todo').forEach(todo => {
+    document.querySelectorAll('#todo').forEach(todo => {
         Array.from(todo.classList).some(item => item === 'completed') ?
             todo.className = `todo ${color}-todo completed`
             : todo.className = `todo ${color}-todo`;
